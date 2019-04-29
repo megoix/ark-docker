@@ -1,5 +1,5 @@
 FROM centos:7
-MAINTAINER boerngenschmidt
+MAINTAINER megoix
 
 # Var for first config
 ENV SESSIONNAME="Ark Docker" \
@@ -18,7 +18,7 @@ ENV SESSIONNAME="Ark Docker" \
     TZ=UTC
 
 ## Install dependencies
-RUN yum -y install glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib \
+RUN yum -y install glibc.i686 libstdc++-4.8.5-36.el7_6.1.x64_64 git lsof bzip2 cronie perl-Compress-Zlib \
  && yum clean all \
  && adduser -u $ARK_UID -s /bin/bash -U steam
 
