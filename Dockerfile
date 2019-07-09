@@ -1,6 +1,6 @@
 FROM centos:7
 
-# Var for first config
+# Variables for first run
 ENV SESSIONNAME="Ark Docker" \
     SERVERMAP="TheIsland" \
     SERVERPASSWORD="" \
@@ -10,6 +10,7 @@ ENV SESSIONNAME="Ark Docker" \
     BACKUPONSTART=1 \
     SERVERPORT=27015 \
     STEAMPORT=7778 \
+    RCONPORT=32330 \
     BACKUPONSTOP=1 \
     WARNONSTOP=1 \
     ARK_UID=1000 \
@@ -48,10 +49,13 @@ COPY arkmanager-system.cfg /etc/arkmanager/arkmanager.cfg
 # Define default config file in /etc/arkmanager
 COPY instance.cfg /etc/arkmanager/instances/main.cfg
 
-EXPOSE ${STEAMPORT} 32330 ${SERVERPORT}
-# Add UDP
+# Define exposed network ports
+# TCP
+EXPOSE ${STEAMPORT} ${RCONPORT} ${SERVERPORT}
+# UDP
 EXPOSE ${STEAMPORT}/udp ${SERVERPORT}/udp
 
+# Define exposed volume
 VOLUME  /ark
 
 # Change the working directory to /ark
